@@ -7,6 +7,7 @@ import Login from "./Login";
 import BlogDetails from "./BlogDetails";
 import NotFound from "./NotFound";
 import Navbar from "./Navbar";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 // import React from "react";
