@@ -19,7 +19,10 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject"
+		"eject": "react-scripts eject",
+		"server": "nodemon server --prefix backend",
+		"client": "npm start",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
 	"eslintConfig": {
 		"extends": [
@@ -38,5 +41,8 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"concurrently": "^6.3.0"
 	}
 }

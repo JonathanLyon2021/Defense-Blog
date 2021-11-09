@@ -25,7 +25,7 @@ app.use(
 ); // does the same thing as the body parser, applies form data to the req.body object, allowing to to go to the backend
 
 //routes
-app.use(authRoutes);
+app.use("./api/users", authRoutes);
 
 //error handling
 app.use((error, req, res, next) => {
