@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import register from "./actions/register";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Registration = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [message, setMessage] = useState(null);
-    const history = useHistory();
+	const history = useHistory();
 
-	const submitHandler = (event) => {
+	const submitHandler = async (event) => {
 		event.preventDefault();
 		if (password !== confirmPassword) {
 			setMessage("Passwords do not match");
@@ -19,10 +19,20 @@ const Registration = () => {
 				setMessage("");
 			}, 3000);
 		}
-        if(email && password && confirmPassword){
-            register(email, password);
-            history.push("/login")
-        }
+		if (email && password && confirmPassword) {
+			const result = await register(email, password);
+			console.log(result);
+
+			if (result.error) {
+				setMessage(result.error);
+
+				setTimeout(() => {
+					setMessage("");
+				}, 4000);
+				return;
+			}
+			history.push("/login");
+		}
 	};
 
 	return (
