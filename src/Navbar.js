@@ -21,7 +21,13 @@ const Navbar = () => {
 						{" "}
 						Signup{" "}
 					</Link>
-					<Link to="/" className="mx-4">
+					<Link
+						to="/"
+						className="mx-4"
+						onClick={() => {
+							localStorage.removeItem("jwt");
+						}}
+					>
 						{" "}
 						Logout{" "}
 					</Link>

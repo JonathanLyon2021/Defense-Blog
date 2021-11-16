@@ -5,12 +5,12 @@ const postSignup = async (req, res, next) => {
 	const { email, password } = req.body;
 
 	try {
-		const checkemail = await User.find({ email: email });
-		if (checkemail) {
+		const checkemail = await User.find({ email });
+		if (checkemail.length > 0) {
 			res.json({ error: "E-mail already registered" });
 			return;
 		}
-		//validation
+		//validatio
 		//hash the password
 		const salt = await bcrypt.genSalt(10);
 
@@ -35,22 +35,29 @@ const postSignup = async (req, res, next) => {
 
 const postLogin = async (req, res, next) => {
 	const { email, password } = req.body;
-
+	console.log(req.body);
 	try {
-		const user = await User.findOne({ email: email });
+		const user = await User.find({ email });
+		console.log(user);
 		if (!user) {
-			throw new Error("E-mail not registered in database");
-		}
-		const decodedPassword = await bcrypt.compare(password, user.password);
-		if (decodedPassword) {
-			res.status(200).json({
-				_id: user._id,
-				email: user.email,
-				token: generateToken(user._id),
-			});
+			res.json({ error: "E-mail not registered in database" });
+			return;
 		} else {
-			res.status(401);
-			throw new Error("Authentication failed");
+			const decodedPassword = await bcrypt.compare(
+				password,
+				user[0].password
+			);
+			console.log(decodedPassword);
+			if (decodedPassword) {
+				res.status(200).json({
+					_id: user._id,
+					email: user.email,
+					token: generateToken(user._id),
+				});
+			} else {
+				res.json({ error: "Authentication failed" });
+				return;
+			}
 		}
 	} catch (err) {
 		if (!err.statusCode) {
