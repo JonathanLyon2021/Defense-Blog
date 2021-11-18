@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import createBlog from "./actions/createBlog"
+import createBlog from "./actions/createBlog";
 
 const Create = () => {
 	const [title, setTitle] = useState("");
@@ -8,14 +8,13 @@ const Create = () => {
 	const [author, setAuthor] = useState("");
 	const [message, setMessage] = useState(null);
 
-    const history = useHistory();
+	const history = useHistory();
 
-	const handleSubmit = async(e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("Submitting");
-        
-			if (title && body && author) {
-			const result = await createBlog( title, body, author);
+		console.log(title, body, author);
+		if (title && body && author) {
+			const result = await createBlog(title, body, author);
 			console.log(result);
 
 			if (result.error) {
@@ -28,39 +27,67 @@ const Create = () => {
 			}
 			history.push("/");
 		}
-}
+	};
 
 	return (
-<>
-	{message && <h1>{message}</h1>}
-		<div className="create">
-			<h2>Add a New Blog</h2>
-			<form onSubmit={handleSubmit}>
-				<label>Blog title:</label>
-				<input
-					type="text"
-					required
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
-				/>
-				<label>Blog body:</label>
-				<textarea
-					required
-					value={body}
-					onChange={(e) => setBody(e.target.value)}
-				></textarea>
-				<label>Blog author:</label>
-				<select
-					value={author}
-					onChange={(e) => setAuthor(e.target.value)}
+		<>
+			{message && <h1>{message}</h1>}
+
+			<div className="container">
+				<form>
+					<div className="form-group my-2">
+						<label htmlFor="exampleFormControlInput1">Title</label>
+						<input
+							type="email"
+							className="form-control"
+							id="exampleFormControlInput1"
+							required
+							value={title}
+							onChange={(e) => setTitle(e.target.value)}
+						/>
+					</div>
+					<div className="form-group my-2">
+						<label htmlFor="exampleFormControlSelect1">
+							Author
+						</label>
+						<select
+							className="form-control"
+							id="exampleFormControlSelect1"
+							value={author}
+							onChange={(e) => setAuthor(e.target.value)}
+						>
+							<option defaultValue>Select</option>
+							<option>John</option>
+							<option>Bill</option>
+							<option>Sam</option>
+							<option>Bob</option>
+							<option>Tom</option>
+						</select>
+					</div>
+
+					<div className="form-group my-2">
+						<label htmlFor="exampleFormControlTextarea1">
+							Description
+						</label>
+						<textarea
+							className="form-control"
+							id="exampleFormControlTextarea1"
+							rows="15"
+							required
+							value={body}
+							onChange={(e) => setBody(e.target.value)}
+						></textarea>
+					</div>
+				</form>
+				<button
+					type="button"
+					className="btn btn-primary my-2"
+					onClick={handleSubmit}
 				>
-					<option value="me">me</option>
-					<option value="you">you</option>
-				</select>
-				<button>Add Blog</button>
-			</form>
-		</div>
-</>
+					Submit
+				</button>
+			</div>
+		</>
 	);
 };
 

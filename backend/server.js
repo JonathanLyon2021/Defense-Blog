@@ -29,7 +29,7 @@ app.use(
 
 //routes
 app.use("/api/users", authRoutes);
-app.use("/api/blogs/create", blogRoutes);
+app.use("/api/blogs", blogRoutes);
 
 //error handling
 app.use((error, req, res, next) => {
