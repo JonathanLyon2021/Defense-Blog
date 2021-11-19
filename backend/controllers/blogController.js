@@ -17,6 +17,14 @@ const getBlogs = async (req, res, next) => {
 	try {
 		let blogs = await Blog.find();
 
+		blogs = blogs.map((blog) => {
+			let description = blog.body
+				.split(" ")
+				.slice(0, 50)
+				.join(" ");
+			return { title: blog.title, body: description, _id: blog._id };
+		});
+
 		res.json({ blogs });
 	} catch (err) {
 		console.log(err);

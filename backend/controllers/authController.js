@@ -1,10 +1,23 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
+const { validationResult } = require("express-validator");
+
 const postSignup = async (req, res, next) => {
 	const { email, password } = req.body;
 
 	try {
+		//Validation
+		const errors = validationResult(req);
+		console.log(errors);
+
+		if (!errors.isEmpty()) {
+			const error = new Error("Validation Failed");
+			error.statusCode = 422;
+			error.data = errors.array();
+			throw error;
+		}
+
 		const checkemail = await User.find({ email });
 		if (checkemail.length > 0) {
 			res.json({ error: "E-mail already registered" });
@@ -37,6 +50,16 @@ const postLogin = async (req, res, next) => {
 	const { email, password } = req.body;
 	console.log(req.body);
 	try {
+		const errors = validationResult(req);
+		console.log(errors);
+
+		if (!errors.isEmpty()) {
+			const error = new Error("Validation Failed");
+			error.statusCode = 422;
+			error.data = errors.array();
+			throw error;
+		}
+
 		const user = await User.find({ email });
 		console.log(user);
 		if (!user) {

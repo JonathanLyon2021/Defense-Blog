@@ -10,29 +10,28 @@ const Login = () => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		if (email && password) {
-			console.log(password);
-			const result = await login(email, password);
-			console.log(result);
+		// if (email && password) {
+		// console.log(password);
+		const result = await login(email, password);
+		console.log(result);
 
-			if (result.error) {
-				setMessage(result.error);
+		if (result.data) {
+			setMessage(result.data[0].msg);
 
-				setTimeout(() => {
-					setMessage("");
-				}, 4000);
-				return;
-			}
-			localStorage.setItem("jwt", result.token);
-			history.push("/");
+			setTimeout(() => {
+				setMessage("");
+			}, 4000);
+			return;
 		}
+		localStorage.setItem("jwt", result.token);
+		history.push("/");
 	};
 
 	return (
 		<>
 			{message && <h1>{message}</h1>}
 
-			<div>
+			<div className="container">
 				<form>
 					<div className="form-group">
 						<label htmlFor="exampleInputEmail1">
@@ -64,7 +63,7 @@ const Login = () => {
 					</div>
 					<button
 						type="submit"
-						className="btn btn-primary"
+						className="btn btn-primary mt-2"
 						onClick={submitHandler}
 					>
 						Submit

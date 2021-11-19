@@ -38,7 +38,7 @@ app.use((error, req, res, next) => {
 	const message = error.message;
 	const data = error.data;
 	//server response
-	res.status(status).json({ message, data });
+	res.status(200).json({ message, data });
 });
 
 //connecting to database and run Server

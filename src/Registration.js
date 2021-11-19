@@ -18,19 +18,19 @@ const Registration = () => {
 			setTimeout(() => {
 				setMessage("");
 			}, 3000);
+			return;
 		}
-		if (email && password && confirmPassword) {
-			const result = await register(email, password);
-			console.log(result);
+		const result = await register(email, password);
+		
 
-			if (result.error) {
-				setMessage(result.error);
+		if (result.data) {
+			setMessage(result.data[0].msg);
 
-				setTimeout(() => {
-					setMessage("");
-				}, 4000);
-				return;
-			}
+			setTimeout(() => {
+				setMessage("");
+			}, 4000);
+			return;
+		} else {
 			history.push("/login");
 		}
 	};
@@ -39,7 +39,7 @@ const Registration = () => {
 		<>
 			{message && <h1>{message}</h1>}
 
-			<div>
+			<div className="container">
 				<form>
 					<div className="form-group">
 						<label htmlFor="exampleInputEmail1">
@@ -86,7 +86,7 @@ const Registration = () => {
 					</div>
 					<button
 						type="submit"
-						className="btn btn-primary"
+						className="btn btn-primary mt-2"
 						onClick={submitHandler}
 					>
 						Submit
