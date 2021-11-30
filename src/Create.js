@@ -4,29 +4,32 @@ import createBlog from "./actions/createBlog";
 
 const Create = () => {
 	const [title, setTitle] = useState("");
-	const [body, setBody] = useState("");
+	const [content, setContent] = useState("");
 	const [author, setAuthor] = useState("");
 	const [message, setMessage] = useState(null);
 
 	const history = useHistory();
 
 	const handleSubmit = async (e) => {
+		const authorId = localStorage.getItem("userId");
 		e.preventDefault();
-		console.log(title, body, author);
-		if (title && body && author) {
-			const result = await createBlog(title, body, author);
+		console.log(title, content, author, authorId);
+		// if (title && content && author) {
+			const result = await createBlog(title, content, author, authorId);
 			console.log(result);
 
-			if (result.error) {
-				setMessage(result.error);
+			
+		if (result.data) {
+			setMessage(result.data[0].msg);
 
-				setTimeout(() => {
-					setMessage("");
-				}, 4000);
-				return;
-			}
+			setTimeout(() => {
+				setMessage("");
+			}, 4000);
+			return;
+		} else {
 			history.push("/");
 		}
+		// }
 	};
 
 	return (
@@ -38,7 +41,7 @@ const Create = () => {
 					<div className="form-group my-2">
 						<label htmlFor="exampleFormControlInput1">Title</label>
 						<input
-							type="email"
+							name="title"
 							className="form-control"
 							id="exampleFormControlInput1"
 							required
@@ -51,6 +54,7 @@ const Create = () => {
 							Author
 						</label>
 						<select
+							name="author"
 							className="form-control"
 							id="exampleFormControlSelect1"
 							value={author}
@@ -70,12 +74,13 @@ const Create = () => {
 							Description
 						</label>
 						<textarea
+						    name="content"
 							className="form-control"
 							id="exampleFormControlTextarea1"
 							rows="15"
 							required
-							value={body}
-							onChange={(e) => setBody(e.target.value)}
+							value={content}
+							onChange={(e) => setContent(e.target.value)}
 						></textarea>
 					</div>
 				</form>

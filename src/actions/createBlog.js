@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const createBlog = async (title, body, author) => {
-	console.log(title, body, author);
+const createBlog = async (title, content, author, authorId) => {
+	console.log(title, content, author,authorId);
 	try {
 		const config = {
 			headers: {
@@ -10,7 +10,7 @@ const createBlog = async (title, body, author) => {
 		};
 		const { data } = await axios.post(
 			"http://localhost:8000/api/blogs/create",
-			{ title, body, author },
+			{ title, content, author, authorId },
 			config
 		);
 		if (data) {

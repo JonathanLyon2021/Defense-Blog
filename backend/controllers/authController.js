@@ -72,11 +72,7 @@ const postLogin = async (req, res, next) => {
 			);
 			console.log(decodedPassword);
 			if (decodedPassword) {
-				res.status(200).json({
-					_id: user._id,
-					email: user.email,
-					token: generateToken(user._id),
-				});
+				res.status(200).json(...user);
 			} else {
 				res.json({ error: "Authentication failed" });
 				return;

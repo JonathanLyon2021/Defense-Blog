@@ -7,7 +7,10 @@ const blogSchema = new mongoose.Schema(
 		author: {
 			type: String,
 		},
-		body: {
+		content: {
+			type: String,
+		},
+		authorId: {
 			type: String,
 		},
 	},

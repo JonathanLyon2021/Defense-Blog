@@ -23,12 +23,14 @@ const Login = () => {
 			}, 4000);
 			return;
 		}
-		localStorage.setItem("jwt", result.token);
+		localStorage.setItem("userId", result._id);
+		localStorage.setItem("userEmail", result.email);
 		history.push("/");
 	};
 
 	return (
 		<>
+			<h1 class="text-center text-primary">Sign In</h1>
 			{message && <h1>{message}</h1>}
 
 			<div className="container">

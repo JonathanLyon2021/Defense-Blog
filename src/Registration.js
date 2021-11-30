@@ -37,6 +37,7 @@ const Registration = () => {
 
 	return (
 		<>
+		<h1 class="text-center text-primary">Registration</h1>
 			{message && <h1>{message}</h1>}
 
 			<div className="container">
