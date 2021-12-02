@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import BlogToDelete from "./actions/deleteBlog";
 
-const BlogDetails = () => {
+const BlogDetails = ({ edit, isEditMode }) => {
+	const history = useHistory();
 	const [title, setTitle] = useState([]);
 	const [body, setBody] = useState([]);
 	const [author, setAuthor] = useState([]);
+	const [authorId, setAuthorId] = useState("");
 
 	const { id } = useParams();
 
@@ -18,10 +21,27 @@ const BlogDetails = () => {
 			setTitle(data.blog.title);
 			setBody(data.blog.body);
 			setAuthor(data.blog.author);
+			setAuthorId(data.blog.authorId);
 		};
 
 		blogs();
-	}, [id]);
+	}, []);
+
+	const handleDelete = async () => {
+		const result = await BlogToDelete(id);
+		console.log(edit);
+		if (result) {
+			history.push("/");
+		}
+	};
+
+	const handleEdit = async () => {
+		isEditMode();
+		console.log(id);
+		history.push({
+			pathname: `/create/blogs/edit/${id}`,
+		});
+	};
 
 	return (
 		<div className="container">
@@ -31,6 +51,30 @@ const BlogDetails = () => {
 					<h5 className="card-title">{title}</h5>
 					<p className="card-text">{body}</p>
 				</div>
+				{authorId === localStorage.getItem("userId") && (
+					<div className="container">
+						<div
+							className="btn-group"
+							role="group"
+							aria-label="Basic example"
+						>
+							<button
+								type="button"
+								className="btn btn-success"
+								onClick={handleEdit}
+							>
+								Edit
+							</button>
+							<button
+								type="button"
+								className="btn btn-danger"
+								onClick={handleDelete}
+							>
+								Delete
+							</button>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

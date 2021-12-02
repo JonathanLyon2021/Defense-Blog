@@ -21,7 +21,6 @@ const Registration = () => {
 			return;
 		}
 		const result = await register(email, password);
-		
 
 		if (result.data) {
 			setMessage(result.data[0].msg);
@@ -35,9 +34,23 @@ const Registration = () => {
 		}
 	};
 
+	const handleOnChange = async (event) => {
+		setEmail(event.target.value);
+		const result = await register(email, password);
+		if (result.data) {
+			setMessage(result.data[0].msg);
+		} else {
+			setMessage("");
+		}
+
+		if (password !== confirmPassword) {
+			setMessage("Passwords do not match");
+		}
+	};
+
 	return (
 		<>
-		<h1 class="text-center text-primary">Registration</h1>
+			<h1 class="text-center text-primary">Registration</h1>
 			{message && <h1>{message}</h1>}
 
 			<div className="container">
@@ -52,9 +65,7 @@ const Registration = () => {
 							name="email"
 							required
 							value={email}
-							onChange={(eventObj) =>
-								setEmail(eventObj.target.value)
-							}
+							onChange={(eventObj) => handleOnChange(eventObj)}
 						/>
 					</div>
 					<div className="form-group">

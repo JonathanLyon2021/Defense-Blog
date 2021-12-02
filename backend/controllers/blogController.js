@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator");
 const postBlog = async (req, res, next) => {
 	console.log("postBlog");
 	const { title, content, author, authorId } = req.body;
-console.log(req.body);
+	console.log(req.body);
 
 	try {
 		//Validation
@@ -33,7 +33,12 @@ const getBlogs = async (req, res, next) => {
 
 		blogs = blogs.map((blog) => {
 			let description = blog.content.split(" ").slice(0, 50).join(" ");
-			return { title: blog.title, content: description, _id: blog._id, authorId: blog.authorId };
+			return {
+				title: blog.title,
+				content: description,
+				_id: blog._id,
+				authorId: blog.authorId,
+			};
 		});
 
 		res.json({ blogs });
@@ -54,4 +59,46 @@ const getBlogDetails = async (req, res, next) => {
 	}
 };
 
-module.exports = { postBlog, getBlogs, getBlogDetails };
+const deleteBlog = async (req, res, next) => {
+	const id = req.params.blogId;
+	try {
+		const blog = await Blog.findByIdAndDelete(id);
+
+		if (blog) {
+			console.log(blog);
+			res.json({ message: "Blog Deleted" });
+		} else {
+			const error = new Error("Blog Not Found");
+		}
+	} catch (err) {
+		console.log(err);
+		next(err);
+	}
+};
+
+const editBlog = async (req, res, next) => {
+	const { title, content, author, authorId } = req.body;
+	const id = req.params.id;
+	try {
+		let blog = await Blog.findById(id);
+		if (blog) {
+			blog.title = title || blog.title;
+			blog.content = content || blog.content;
+			blog.author = author || blog.author;
+			blog.authorId = authorId || blog.authorId;
+			const result = await blog.save();
+
+			if (result) {
+				console.log(result);
+				res.status(201).json({ message: "Blog Updated" });
+			} else {
+				new Error("Blog Not Found");
+			}
+		}
+	} catch (err) {
+		console.log(err);
+		next(err);
+	}
+};
+
+module.exports = { postBlog, getBlogs, getBlogDetails, deleteBlog, editBlog };

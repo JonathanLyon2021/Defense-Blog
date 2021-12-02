@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const Register = async (email, password) => {
+const login = async (id) => {
 	try {
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
 			},
 		};
-		const { data } = await axios.post(
-			"http://localhost:8000/api/users/signup",
-			{ email, password },
+		const { data } = await axios.delete(
+			"http://localhost:8000/api/blogs/" + id,
+			null,
 			config
 		);
 		if (data) {
@@ -22,4 +22,4 @@ const Register = async (email, password) => {
 	}
 };
 
-export default Register;
+export default login;

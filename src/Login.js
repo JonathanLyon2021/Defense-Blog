@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import login from "./actions/login";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState(null);
@@ -25,6 +25,7 @@ const Login = () => {
 		}
 		localStorage.setItem("userId", result._id);
 		localStorage.setItem("userEmail", result.email);
+		setIsLoggedIn();
 		history.push("/");
 	};
 
