@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import login from "./actions/login";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [message, setMessage] = useState(null);
@@ -10,31 +10,34 @@ const Login = () => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		if (email && password) {
-			const result = await login(email, password);
-			console.log(result);
+		// if (email && password) {
+		// console.log(password);
+		const result = await login(email, password);
+		console.log(result);
 
-			if (result.error) {
-				setMessage(result.error);
+		if (result.data) {
+			setMessage(result.data[0].msg);
 
-				setTimeout(() => {
-					setMessage("");
-				}, 4000);
-				return;
-			}
-			localStorage.setItem("jwt", result.token);
-			history.push("/");
+			setTimeout(() => {
+				setMessage("");
+			}, 4000);
+			return;
 		}
+		localStorage.setItem("userId", result._id);
+		localStorage.setItem("userEmail", result.email);
+		setIsLoggedIn();
+		history.push("/");
 	};
 
 	return (
 		<>
-			{message && <h1>{message}</h1>}
+			<h1 class="text-center text-primary">Sign in</h1>
+			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
-			<div>
+			<div className="container">
 				<form>
 					<div className="form-group">
-						<label htmlFor="exampleInputEmail1">
+						<label htmlFor="exampleInputEmail1" style={{ color: "white" }}>
 							Email address
 						</label>
 						<input
@@ -49,7 +52,7 @@ const Login = () => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1">Password</label>
+						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>Password</label>
 						<input
 							type="password"
 							className="form-control"
@@ -63,7 +66,7 @@ const Login = () => {
 					</div>
 					<button
 						type="submit"
-						className="btn btn-primary"
+						className="btn btn-primary mt-2"
 						onClick={submitHandler}
 					>
 						Submit

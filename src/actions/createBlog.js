@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const Register = async (email, password) => {
+const createBlog = async (title, content, author, authorId) => {
+	console.log(title, content, author,authorId);
 	try {
 		const config = {
 			headers: {
@@ -8,8 +9,8 @@ const Register = async (email, password) => {
 			},
 		};
 		const { data } = await axios.post(
-			"http://localhost:8000/api/users/signup",
-			{ email, password },
+			"http://localhost:8000/api/blogs/create",
+			{ title, content, author, authorId },
 			config
 		);
 		if (data) {
@@ -22,4 +23,4 @@ const Register = async (email, password) => {
 	}
 };
 
-export default Register;
+export default createBlog;

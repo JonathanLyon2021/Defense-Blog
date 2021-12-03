@@ -18,31 +18,45 @@ const Registration = () => {
 			setTimeout(() => {
 				setMessage("");
 			}, 3000);
+			return;
 		}
-		if (email && password && confirmPassword) {
-			const result = await register(email, password);
-			console.log(result);
+		const result = await register(email, password);
 
-			if (result.error) {
-				setMessage(result.error);
+		if (result.data) {
+			setMessage(result.data[0].msg);
 
-				setTimeout(() => {
-					setMessage("");
-				}, 4000);
-				return;
-			}
+			setTimeout(() => {
+				setMessage("");
+			}, 4000);
+			return;
+		} else {
 			history.push("/login");
+		}
+	};
+
+	const handleOnChange = async (event) => {
+		setEmail(event.target.value);
+		const result = await register(email, password);
+		if (result.data) {
+			setMessage(result.data[0].msg);
+		} else {
+			setMessage("");
+		}
+
+		if (password !== confirmPassword) {
+			setMessage("Passwords do not match");
 		}
 	};
 
 	return (
 		<>
-			{message && <h1>{message}</h1>}
+			<h1 class="text-center text-primary">Registration</h1>
+			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
-			<div>
+			<div className="container">
 				<form>
 					<div className="form-group">
-						<label htmlFor="exampleInputEmail1">
+						<label htmlFor="exampleInputEmail1" style={{ color: "white" }}>
 							Email address
 						</label>
 						<input
@@ -51,13 +65,11 @@ const Registration = () => {
 							name="email"
 							required
 							value={email}
-							onChange={(eventObj) =>
-								setEmail(eventObj.target.value)
-							}
+							onChange={(eventObj) => handleOnChange(eventObj)}
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1">Password</label>
+						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>Password</label>
 						<input
 							type="password"
 							className="form-control"
@@ -70,7 +82,7 @@ const Registration = () => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1">
+						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>
 							Confirm Password
 						</label>
 						<input
@@ -86,7 +98,7 @@ const Registration = () => {
 					</div>
 					<button
 						type="submit"
-						className="btn btn-primary"
+						className="btn btn-primary mt-2"
 						onClick={submitHandler}
 					>
 						Submit

@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 //remote files
 const authRoutes = require("./routes/authRoutes.js");
+const blogRoutes = require("./routes/blogRoutes.js");
 
 //global variables
 const port = 8000;
@@ -28,6 +29,7 @@ app.use(
 
 //routes
 app.use("/api/users", authRoutes);
+app.use("/api/blogs", blogRoutes);
 
 //error handling
 app.use((error, req, res, next) => {
@@ -36,7 +38,7 @@ app.use((error, req, res, next) => {
 	const message = error.message;
 	const data = error.data;
 	//server response
-	res.status(status).json({ message, data });
+	res.status(200).json({ message, data });
 });
 
 //connecting to database and run Server
