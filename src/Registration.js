@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import register from "./actions/register";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Registration = () => {
 	const [email, setEmail] = useState("");
@@ -23,14 +24,10 @@ const Registration = () => {
 		const result = await register(email, password);
 
 		if (result.data) {
-			setMessage(result.data[0].msg);
-
-			setTimeout(() => {
-				setMessage("");
-			}, 4000);
-			return;
+			toast.error(result.data[0].msg, { theme: "colored" });
 		} else {
-			history.push("/login");
+			toast.success("Registered Successfully", { theme: "colored" });
+				history.push("/login");
 		}
 	};
 
@@ -50,13 +47,17 @@ const Registration = () => {
 
 	return (
 		<>
+			{/* <ToastContainer position="top-center" pauseOnFocusLoss={false} /> */}
 			<h1 class="text-center text-primary">Registration</h1>
 			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
 			<div className="container">
 				<form>
 					<div className="form-group">
-						<label htmlFor="exampleInputEmail1" style={{ color: "white" }}>
+						<label
+							htmlFor="exampleInputEmail1"
+							style={{ color: "white" }}
+						>
 							Email address
 						</label>
 						<input
@@ -69,7 +70,12 @@ const Registration = () => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>Password</label>
+						<label
+							htmlFor="exampleInputPassword1"
+							style={{ color: "white" }}
+						>
+							Password
+						</label>
 						<input
 							type="password"
 							className="form-control"
@@ -82,7 +88,10 @@ const Registration = () => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>
+						<label
+							htmlFor="exampleInputPassword1"
+							style={{ color: "white" }}
+						>
 							Confirm Password
 						</label>
 						<input

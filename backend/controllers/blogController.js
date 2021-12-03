@@ -85,25 +85,44 @@ const editBlog = async (req, res, next) => {
 	console.log(req.body);
 	console.log(id);
 	try {
-		let blog = await Blog.findByIdAndUpdate(id);
-		console.log(blog);
-		let updatedBlog = blog.find((blog) => blog.title === title);
-		// console.log(updatedBlog._id);
 
-		if (updatedBlog) {
-			updatedBlog.title = title || updatedBlog.title;
-			updatedBlog.content = content || updatedBlog.content;
-			updatedBlog.author = author || updatedBlog.author;
-			updatedBlog.authorId = authorId || updatedBlog.authorId;
-			const result = await updatedBlog.create();
+		const blog = await Blog.findByIdAndUpdate(id, {
+			title,
+			content,
+			author,
+			authorId,
+		});
 
-			if (result) {
-				console.log(result);
-				res.status(201).json({ message: "Blog Updated" });
-			} else {
-				new Error("Blog Not Found");
-			}
+		if (blog) {
+			console.log(blog);
+			res.json({ message: "Blog Updated" });
+		} else {
+						res.json({ message: "Blog ERROR" });
+
 		}
+
+
+
+
+		// let blog = await Blog.findByIdAndUpdate(id);
+		// console.log(blog);
+		// let updatedBlog = blog.find((blog) => blog.title === title);
+		// // console.log(updatedBlog._id);
+
+		// if (updatedBlog) {
+		// 	updatedBlog.title = title || updatedBlog.title;
+		// 	updatedBlog.content = content || updatedBlog.content;
+		// 	updatedBlog.author = author || updatedBlog.author;
+		// 	updatedBlog.authorId = authorId || updatedBlog.authorId;
+		// 	const result = await updatedBlog.create();
+
+		// 	if (result) {
+		// 		console.log(result);
+		// 		res.status(201).json({ message: "Blog Updated" });
+		// 	} else {
+		// 		new Error("Blog Not Found");
+		// 	}
+		// }
 	} catch (err) {
 		console.log(err);
 		next(err);

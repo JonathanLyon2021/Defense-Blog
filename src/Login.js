@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import login from "./actions/login";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = ({ setIsLoggedIn }) => {
 	const [email, setEmail] = useState("");
@@ -16,17 +17,14 @@ const Login = ({ setIsLoggedIn }) => {
 		console.log(result);
 
 		if (result.data) {
-			setMessage(result.data[0].msg);
-
-			setTimeout(() => {
-				setMessage("");
-			}, 4000);
-			return;
+			toast.error(result.data[0].msg, { theme: "colored" });
+		} else {
+			localStorage.setItem("userId", result._id);
+			localStorage.setItem("userEmail", result.email);
+			setIsLoggedIn();
+			toast.success("Logged In Successful", { theme: "colored" });
+			history.push("/");
 		}
-		localStorage.setItem("userId", result._id);
-		localStorage.setItem("userEmail", result.email);
-		setIsLoggedIn();
-		history.push("/");
 	};
 
 	return (
@@ -37,7 +35,10 @@ const Login = ({ setIsLoggedIn }) => {
 			<div className="container">
 				<form>
 					<div className="form-group">
-						<label htmlFor="exampleInputEmail1" style={{ color: "white" }}>
+						<label
+							htmlFor="exampleInputEmail1"
+							style={{ color: "white" }}
+						>
 							Email address
 						</label>
 						<input
@@ -52,7 +53,12 @@ const Login = ({ setIsLoggedIn }) => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>Password</label>
+						<label
+							htmlFor="exampleInputPassword1"
+							style={{ color: "white" }}
+						>
+							Password
+						</label>
 						<input
 							type="password"
 							className="form-control"
