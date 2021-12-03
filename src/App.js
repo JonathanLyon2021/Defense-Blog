@@ -9,6 +9,8 @@ import NotFound from "./NotFound";
 import Navbar from "./Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,7 +19,7 @@ function App() {
 	const toggleEditMode = () => {
 		setIsEditMode(!isEditMode);
 	};
-//doesn't setting false above already mean these methods don't need the '!isEditMode' && 'isLoggedIn'
+	//doesn't setting false above already mean these methods don't need the '!isEditMode' && 'isLoggedIn'
 	const handleLogIn = () => {
 		setIsLoggedIn(!isLoggedIn);
 	};
@@ -25,6 +27,10 @@ function App() {
 	return (
 		<>
 			<Router>
+				<ToastContainer
+					position="top-center"
+					pauseOnFocusLoss={false}
+				/>
 				<Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={handleLogIn} />
 				<Switch>
 					<div className="Body">

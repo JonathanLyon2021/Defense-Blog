@@ -4,6 +4,8 @@ import createBlog from "./actions/createBlog";
 import BlogToEdit from "./actions/editBlog";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const Create = ({ edit, isEditMode }) => {
 	const [title, setTitle] = useState("");
@@ -58,13 +60,12 @@ const Create = ({ edit, isEditMode }) => {
 		console.log(result);
 
 		if (result.data) {
-			setMessage(result.data[0].msg);
+toast.error(result.data[0].msg, { theme: "colored" });
 
-			setTimeout(() => {
-				setMessage("");
-			}, 4000);
-			return;
+		
 		} else {
+toast.success("Blog Successfully Created", { theme: "colored" });
+
 			history.push("/");
 		}
 		// }
