@@ -9,31 +9,38 @@ const Create = ({ edit, isEditMode }) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [author, setAuthor] = useState("");
+	// const [blog, setBlog] = useState([]);
+
 	const [message, setMessage] = useState(null);
 	const [authorId, setAuthorId] = useState(null);
+
+	// const { id } = useParams();
 
 	const { id } = useParams();
 
 	useEffect(() => {
 		setAuthorId(localStorage.getItem("userId"));
-		if (edit) {
-			blogs();
-		}
+		const blogs = async () => {
+			console.log("id", id);
+			const { data } = await axios.get(
+				`http://localhost:8000/api/blogs/${id}`
+			);
+			console.log(data);
+
+			if (data) {
+				console.log("dsfsdfsdf");
+				console.log(data);
+
+				if (edit) {
+					setTitle(data.blog.title);
+					setContent(data.blog.content);
+					setAuthor(data.blog.author);
+				}
+			}
+		};
+
+		blogs();
 	}, []);
-
-	const blogs = async () => {
-		console.log(id);
-		let { data } = await axios.get(`http://localhost:8000/api/blogs/${id}`);
-
-		console.log(data);
-
-		if (data) {
-			setTitle(data.blog.title);
-			setContent(data.blog.body);
-			setAuthor(data.blog.author);
-			setAuthorId(data.blog.authorId);
-		}
-	};
 
 	const history = useHistory();
 
@@ -64,23 +71,29 @@ const Create = ({ edit, isEditMode }) => {
 	};
 
 	const handleEdit = async () => {
-		const result = await BlogToEdit(title, content, author, authorId);
+		const result = await BlogToEdit(title, content, author, id);
 		console.log(result);
 		if (result) {
 			isEditMode();
-			console.log(edit);
+			// console.log(edit);
 			history.push("/");
 		}
 	};
 
 	return (
 		<>
-			{message && <h1>{message}</h1>}
+			{/* <p>sdfsdfsdg</p> */}
+			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
 			<div className="container">
 				<form>
 					<div className="form-group my-2">
-						<label htmlFor="exampleFormControlInput1">Title</label>
+						<label
+							htmlFor="exampleFormControlInput1"
+							style={{ color: "white" }}
+						>
+							Title
+						</label>
 						<input
 							name="title"
 							className="form-control"
@@ -91,27 +104,27 @@ const Create = ({ edit, isEditMode }) => {
 						/>
 					</div>
 					<div className="form-group my-2">
-						<label htmlFor="exampleFormControlSelect1">
+						<label
+							htmlFor="exampleFormControlSelect1"
+							style={{ color: "white" }}
+						>
 							Author
 						</label>
-						<select
+						<textarea
 							name="author"
 							className="form-control"
 							id="exampleFormControlSelect1"
+							required
 							value={author}
 							onChange={(e) => setAuthor(e.target.value)}
-						>
-							<option defaultValue>Select</option>
-							<option>John</option>
-							<option>Bill</option>
-							<option>Sam</option>
-							<option>Bob</option>
-							<option>Tom</option>
-						</select>
+						></textarea>
 					</div>
 
 					<div className="form-group my-2">
-						<label htmlFor="exampleFormControlTextarea1">
+						<label
+							htmlFor="exampleFormControlTextarea1"
+							style={{ color: "white" }}
+						>
 							Description
 						</label>
 						<textarea
@@ -131,7 +144,7 @@ const Create = ({ edit, isEditMode }) => {
 					className="btn btn-primary my-2"
 					onClick={handleSubmit}
 				>
-					{!edit ? "Edit" : "Submit"}
+					{edit ? "Edit" : "Submit"}
 				</button>
 			</div>
 		</>

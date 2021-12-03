@@ -17,7 +17,7 @@ function App() {
 	const toggleEditMode = () => {
 		setIsEditMode(!isEditMode);
 	};
-
+//doesn't setting false above already mean these methods don't need the '!isEditMode' && 'isLoggedIn'
 	const handleLogIn = () => {
 		setIsLoggedIn(!isLoggedIn);
 	};
@@ -30,6 +30,12 @@ function App() {
 					<div className="Body">
 						<Route exact path="/">
 							<Home />
+						</Route>
+						<Route exact path="/edit/:id">
+							<Create
+								edit={isEditMode}
+								isEditMode={toggleEditMode}
+							/>
 						</Route>
 						<Route path="/create">
 							<Create
@@ -45,12 +51,6 @@ function App() {
 						</Route>
 						<Route path="/blogs/:id">
 							<BlogDetails
-								edit={isEditMode}
-								isEditMode={toggleEditMode}
-							/>
-						</Route>
-						<Route path="/create/blogs/edit/:id">
-							<Create
 								edit={isEditMode}
 								isEditMode={toggleEditMode}
 							/>

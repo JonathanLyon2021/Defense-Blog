@@ -9,23 +9,24 @@ const BlogDetails = ({ edit, isEditMode }) => {
 	const [body, setBody] = useState([]);
 	const [author, setAuthor] = useState([]);
 	const [authorId, setAuthorId] = useState("");
+	const [blogId, setBlogId] = useState("");
+	const [blog, setBlog] = useState(null);
 
 	const { id } = useParams();
 
 	useEffect(() => {
 		const blogs = async () => {
+			console.log("id", id);
 			const { data } = await axios.get(
 				`http://localhost:8000/api/blogs/${id}`
 			);
 			console.log(data);
-			setTitle(data.blog.title);
-			setBody(data.blog.body);
-			setAuthor(data.blog.author);
-			setAuthorId(data.blog.authorId);
+			setBlog(data);
 		};
 
 		blogs();
 	}, []);
+	// does 'id' go in the above array?
 
 	const handleDelete = async () => {
 		const result = await BlogToDelete(id);
@@ -35,47 +36,54 @@ const BlogDetails = ({ edit, isEditMode }) => {
 		}
 	};
 
-	const handleEdit = async () => {
+	const handleEdit = async ( id) => {
 		isEditMode();
+		console.log(edit);
 		console.log(id);
 		history.push({
-			pathname: `/create/blogs/edit/${id}`,
+			pathname: `/edit/${id}`,
 		});
 	};
 
 	return (
 		<div className="container">
-			<div className="card my-3">
-				<div className="card-header">Author: {author}</div>
-				<div className="card-body">
-					<h5 className="card-title">{title}</h5>
-					<p className="card-text">{body}</p>
-				</div>
-				{authorId === localStorage.getItem("userId") && (
-					<div className="container">
-						<div
-							className="btn-group"
-							role="group"
-							aria-label="Basic example"
-						>
-							<button
-								type="button"
-								className="btn btn-success"
-								onClick={handleEdit}
-							>
-								Edit
-							</button>
-							<button
-								type="button"
-								className="btn btn-danger"
-								onClick={handleDelete}
-							>
-								Delete
-							</button>
-						</div>
+			{blog && (
+				<div className="card my-3">
+					<div className="card-header">
+						Author: {blog.blog.author}
 					</div>
-				)}
-			</div>
+					<div className="card-body">
+						<h5 className="card-title">{blog.blog.title}</h5>
+						<p className="card-text">{blog.blog.content}</p>
+					</div>
+					{blog.blog.authorId === localStorage.getItem("userId") && (
+						<div className="container">
+							<div
+								className="btn-group"
+								role="group"
+								aria-label="Basic example"
+							>
+								<button
+									type="button"
+									className="btn btn-success"
+									onClick={(e) => {
+										handleEdit(blog.blog._id);
+									}}
+								>
+									Edit
+								</button>
+								<button
+									type="button"
+									className="btn btn-danger"
+									onClick={handleDelete}
+								>
+									Delete
+								</button>
+							</div>
+						</div>
+					)}
+				</div>
+			)}
 		</div>
 	);
 };

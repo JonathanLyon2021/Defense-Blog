@@ -31,13 +31,13 @@ const Login = ({ setIsLoggedIn }) => {
 
 	return (
 		<>
-			<h1 class="text-center text-primary">Sign In</h1>
-			{message && <h1>{message}</h1>}
+			<h1 class="text-center text-primary">Sign in</h1>
+			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
 			<div className="container">
 				<form>
 					<div className="form-group">
-						<label htmlFor="exampleInputEmail1">
+						<label htmlFor="exampleInputEmail1" style={{ color: "white" }}>
 							Email address
 						</label>
 						<input
@@ -52,7 +52,7 @@ const Login = ({ setIsLoggedIn }) => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1">Password</label>
+						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>Password</label>
 						<input
 							type="password"
 							className="form-control"

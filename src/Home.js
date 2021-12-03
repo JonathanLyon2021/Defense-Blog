@@ -23,7 +23,7 @@ const Home = () => {
 		<>
 			<div className="container">
 				{blogs.length > 0 &&
-					blogs.map(({ title, content, author, _id }, index) => (
+					blogs.map(({ title, author, content, _id }, index) => (
 						<div className="card my-3" key={index}>
 							<div className="card-header">Author: {author}</div>
 							<div className="card-body">

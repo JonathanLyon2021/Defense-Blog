@@ -1,16 +1,16 @@
 import axios from "axios";
 
-const editBlog = async (title, content, author, authorId) => {
-	console.log(title, content, author,authorId);
+const editBlog = async (title, content, author, id) => {
+	console.log(title, content, author, id);
 	try {
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
 			},
 		};
-		const { data } = await axios.put(
-			"http://localhost:8000/api/blogs/edit/" + authorId,
-			{ title, content, author, authorId },
+		const { data } = await axios.post(
+			"http://localhost:8000/api/blogs/edit/" + id,
+			{ title, content, author, id },
 			config
 		);
 		if (data) {

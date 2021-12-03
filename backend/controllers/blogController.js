@@ -38,6 +38,7 @@ const getBlogs = async (req, res, next) => {
 				content: description,
 				_id: blog._id,
 				authorId: blog.authorId,
+				author: blog.author,
 			};
 		});
 
@@ -49,6 +50,7 @@ const getBlogs = async (req, res, next) => {
 };
 
 const getBlogDetails = async (req, res, next) => {
+	const id = req.params.id;
 	try {
 		const blog = await Blog.findOne({ _id: req.params.id });
 
@@ -77,16 +79,23 @@ const deleteBlog = async (req, res, next) => {
 };
 
 const editBlog = async (req, res, next) => {
+	console.log("editBlog");
 	const { title, content, author, authorId } = req.body;
 	const id = req.params.id;
+	console.log(req.body);
+	console.log(id);
 	try {
-		let blog = await Blog.findById(id);
-		if (blog) {
-			blog.title = title || blog.title;
-			blog.content = content || blog.content;
-			blog.author = author || blog.author;
-			blog.authorId = authorId || blog.authorId;
-			const result = await blog.save();
+		let blog = await Blog.findByIdAndUpdate(id);
+		console.log(blog);
+		let updatedBlog = blog.find((blog) => blog.title === title);
+		// console.log(updatedBlog._id);
+
+		if (updatedBlog) {
+			updatedBlog.title = title || updatedBlog.title;
+			updatedBlog.content = content || updatedBlog.content;
+			updatedBlog.author = author || updatedBlog.author;
+			updatedBlog.authorId = authorId || updatedBlog.authorId;
+			const result = await updatedBlog.create();
 
 			if (result) {
 				console.log(result);

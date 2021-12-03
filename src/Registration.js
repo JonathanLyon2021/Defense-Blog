@@ -51,12 +51,12 @@ const Registration = () => {
 	return (
 		<>
 			<h1 class="text-center text-primary">Registration</h1>
-			{message && <h1>{message}</h1>}
+			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
 			<div className="container">
 				<form>
 					<div className="form-group">
-						<label htmlFor="exampleInputEmail1">
+						<label htmlFor="exampleInputEmail1" style={{ color: "white" }}>
 							Email address
 						</label>
 						<input
@@ -69,7 +69,7 @@ const Registration = () => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1">Password</label>
+						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>Password</label>
 						<input
 							type="password"
 							className="form-control"
@@ -82,7 +82,7 @@ const Registration = () => {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="exampleInputPassword1">
+						<label htmlFor="exampleInputPassword1" style={{ color: "white" }}>
 							Confirm Password
 						</label>
 						<input
