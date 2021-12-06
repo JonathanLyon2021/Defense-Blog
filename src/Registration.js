@@ -24,10 +24,22 @@ const Registration = () => {
 		const result = await register(email, password);
 
 		if (result.data) {
-			toast.error(result.data[0].msg, { theme: "colored" });
+			toast.error(result.data[0].msg, {
+				position: "bottom-center",
+				theme: "dark",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
 		} else {
-			toast.success("Registered Successfully", { theme: "colored" });
-				history.push("/login");
+			toast.success("Registered Successfully", {
+				position: "bottom-center",
+				theme: "dark",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
+			history.push("/login");
 		}
 	};
 
@@ -47,8 +59,7 @@ const Registration = () => {
 
 	return (
 		<>
-			{/* <ToastContainer position="top-center" pauseOnFocusLoss={false} /> */}
-			<h1 class="text-center text-primary">Registration</h1>
+			<h1 class="text-center" style={{ color: "white" }}>Registration</h1>
 			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
 			<div className="container">

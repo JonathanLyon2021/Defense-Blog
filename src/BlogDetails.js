@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import BlogToDelete from "./actions/deleteBlog";
+import { toast } from "react-toastify";
 
 const BlogDetails = ({ edit, isEditMode }) => {
 	const history = useHistory();
-	const [title, setTitle] = useState([]);
-	const [body, setBody] = useState([]);
-	const [author, setAuthor] = useState([]);
-	const [authorId, setAuthorId] = useState("");
-	const [blogId, setBlogId] = useState("");
+	// const [title, setTitle] = useState([]);
+	// const [body, setBody] = useState([]);
+	// const [author, setAuthor] = useState([]);
+	// const [authorId, setAuthorId] = useState("");
+	// const [blogId, setBlogId] = useState("");
 	const [blog, setBlog] = useState(null);
 
 	const { id } = useParams();
@@ -30,16 +31,23 @@ const BlogDetails = ({ edit, isEditMode }) => {
 
 	const handleDelete = async () => {
 		const result = await BlogToDelete(id);
-		console.log(edit);
+		// console.log(edit);
 		if (result) {
+			toast.error("Blog Deleted", {
+				position: "bottom-center",
+				theme: "colored",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
 			history.push("/");
 		}
 	};
 
-	const handleEdit = async ( id) => {
+	const handleEdit = async (id) => {
 		isEditMode();
-		console.log(edit);
-		console.log(id);
+		// console.log(edit);
+		// console.log(id);
 		history.push({
 			pathname: `/edit/${id}`,
 		});
@@ -53,7 +61,7 @@ const BlogDetails = ({ edit, isEditMode }) => {
 						Author: {blog.blog.author}
 					</div>
 					<div className="card-body">
-						<h5 className="card-title">{blog.blog.title}</h5>
+						<h4 className="card-title">{blog.blog.title}</h4>
 						<p className="card-text">{blog.blog.content}</p>
 					</div>
 					{blog.blog.authorId === localStorage.getItem("userId") && (

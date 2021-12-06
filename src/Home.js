@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./Footer";
 import axios from "axios";
 
 const Home = () => {
@@ -10,10 +12,8 @@ const Home = () => {
 			const { data } = await axios.get(
 				"http://localhost:8000/api/blogs/"
 			);
-			console.log(data.blogs);
+			// console.log(data.blogs);
 			setBlogs(data.blogs);
-
-
 		};
 
 		blogs();
@@ -21,13 +21,13 @@ const Home = () => {
 
 	return (
 		<>
-			<div className="container">
+			<div className="container Body">
 				{blogs.length > 0 &&
 					blogs.map(({ title, author, content, _id }, index) => (
 						<div className="card my-3" key={index}>
 							<div className="card-header">Author: {author}</div>
 							<div className="card-body">
-								<h5 className="card-title">{title}</h5>
+								<h4 className="card-title">{title}</h4>
 								<p className="card-text">{content}</p>
 								<Link to={`/blogs/${_id}`} className="btn btn-primary">
 									see more...
@@ -36,6 +36,7 @@ const Home = () => {
 						</div>
 					))}
 			</div>
+	
 		</>
 	);
 };
