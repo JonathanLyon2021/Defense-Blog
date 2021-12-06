@@ -8,8 +8,9 @@ exports.signupValidator = (req, res) => {
 			.not()
 			.isEmpty()
 			.withMessage("Please provide email")
-			.isEmail()
+
 			.withMessage("Invalid Email")
+			.isEmail()
 			.custom((email) => {
 				return User.findOne({ email }).then((doc) => {
 					if (doc) {
@@ -22,8 +23,6 @@ exports.signupValidator = (req, res) => {
 			.trim()
 			.isAlphanumeric()
 			.isLength({ min: 8, max: 20 }),
-
-	
 	];
 };
 

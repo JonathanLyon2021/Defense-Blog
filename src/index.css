@@ -1,5 +1,4 @@
 body {
-	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
 		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
 		"Helvetica Neue", sans-serif;
@@ -12,17 +11,7 @@ code {
 		monospace;
 }
 
-.custom-nav {
-	display: flex;
-	align-items: center;
-	padding: 20px;
-}
 
-.links {
-	margin-left: auto;
-	padding: 6px;
-}
 
-.links Link {
-	padding: 6px;
-}
+
+

@@ -11,25 +11,38 @@ const Login = ({ setIsLoggedIn }) => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		// if (email && password) {
-		// console.log(password);
+		if (email && password) {
+			console.log(password);
+		}
 		const result = await login(email, password);
 		console.log(result);
 
 		if (result.data) {
-			toast.error(result.data[0].msg, { theme: "colored" });
+			toast.error(result.data[0].msg, {
+				position: "bottom-center",
+				theme: "dark",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
 		} else {
 			localStorage.setItem("userId", result._id);
 			localStorage.setItem("userEmail", result.email);
 			setIsLoggedIn();
-			toast.success("Logged In Successful", { theme: "colored" });
+			toast.success("Login Successful", {
+				position: "bottom-center",
+				theme: "dark",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
 			history.push("/");
 		}
 	};
 
 	return (
 		<>
-			<h1 class="text-center text-primary">Sign in</h1>
+			<h1 class="text-center" style={{ color: "white" }}>Sign in</h1>
 			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
 			<div className="container">

@@ -4,19 +4,15 @@
 	}
 }
 
-.App-header {
-	background-color: #282c34;
+.App-body {
+	background-color: rgb(5, 5, 160);
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.App-link {
-	color: #61dafb;
+	color: black;
 }
 
 @keyframes App-logo-spin {
@@ -31,3 +27,13 @@
 .Body {
 	background-color: rgb(5, 5, 160);
 }
+.Footer {
+	margin-top: 0;
+	padding: 0;
+	color: rgb(60, 248, 3);
+	background-color: black;
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+   }

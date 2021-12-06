@@ -6,39 +6,29 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
 const Create = ({ edit, isEditMode }) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [author, setAuthor] = useState("");
-	// const [blog, setBlog] = useState([]);
-
 	const [message, setMessage] = useState(null);
 	const [authorId, setAuthorId] = useState(null);
-
-	// const { id } = useParams();
 
 	const { id } = useParams();
 
 	useEffect(() => {
 		setAuthorId(localStorage.getItem("userId"));
 		const blogs = async () => {
-			console.log("id", id);
+			// console.log("id", id);
 			const { data } = await axios.get(
 				`http://localhost:8000/api/blogs/${id}`
 			);
-			console.log(data);
-
-			if (data) {
-				console.log("dsfsdfsdf");
-				console.log(data);
-
+			// console.log(data);
 				if (edit) {
 					setTitle(data.blog.title);
 					setContent(data.blog.content);
 					setAuthor(data.blog.author);
 				}
-			}
+			
 		};
 
 		blogs();
@@ -54,28 +44,44 @@ const Create = ({ edit, isEditMode }) => {
 		}
 
 		e.preventDefault();
-		console.log(title, content, author, authorId);
+		// console.log(title, content, author, authorId);
 		// if (title && content && author) {
 		const result = await createBlog(title, content, author, authorId);
-		console.log(result);
+		// console.log(result);
 
 		if (result.data) {
-toast.error(result.data[0].msg, { theme: "colored" });
-
-		
+			toast.error(result.data[0].msg, {
+				position: "bottom-center",
+				theme: "colored",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
 		} else {
-toast.success("Blog Successfully Created", { theme: "colored" });
+			toast.success("Blog Created", {
+				position: "bottom-center",
+				theme: "colored",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
 
 			history.push("/");
 		}
-		// }
 	};
 
 	const handleEdit = async () => {
 		const result = await BlogToEdit(title, content, author, id);
-		console.log(result);
+		// console.log(result);
 		if (result) {
 			isEditMode();
+			toast.success("Blog Successfully Edited", {
+				position: "bottom-center",
+				theme: "light",
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+			});
 			// console.log(edit);
 			history.push("/");
 		}
@@ -83,7 +89,6 @@ toast.success("Blog Successfully Created", { theme: "colored" });
 
 	return (
 		<>
-			{/* <p>sdfsdfsdg</p> */}
 			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
 			<div className="container">
@@ -142,7 +147,7 @@ toast.success("Blog Successfully Created", { theme: "colored" });
 
 				<button
 					type="button"
-					className="btn btn-primary my-2"
+					className="btn btn-dark my-2"
 					onClick={handleSubmit}
 				>
 					{edit ? "Edit" : "Submit"}
