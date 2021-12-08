@@ -1,15 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./Index.css";
+import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Footer from "./Footer";
 
 ReactDOM.render(
 	// <React.StrictMode>
-		<div>
-			<App />
-		</div>,
+	<div>
+		<App />
+	</div>,
 	// </React.StrictMode>
 	document.getElementById("root")
 );

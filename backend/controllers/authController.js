@@ -22,7 +22,7 @@ const postSignup = async (req, res, next) => {
 			res.json({ error: "E-mail already registered" });
 			return;
 		}
-		//validatio
+		//validation
 		//hash the password
 		const salt = await bcrypt.genSalt(10);
 

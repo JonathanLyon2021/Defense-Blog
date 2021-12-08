@@ -62,7 +62,7 @@ const Registration = () => {
 			<h1 class="text-center" style={{ color: "white" }}>Registration</h1>
 			{message && <h1 style={{ color: "white" }}>{message}</h1>}
 
-			<div className="container">
+			<div className="container" data-testid="Registration Form">
 				<form>
 					<div className="form-group">
 						<label

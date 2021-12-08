@@ -10,13 +10,13 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 	const logoutHandler = () => {
 		localStorage.removeItem("userId");
 		setIsLoggedIn();
-		console.log(isLoggedIn, setIsLoggedIn);
+		// console.log(isLoggedIn, setIsLoggedIn);
 	};
 
 	return (
 		<>
 			<nav className="navbar navbar-expand-xl navbar-dark bg-dark">
-				<h1 className="Heading" style={{ color: "rgb(60, 248, 3)" }}>
+				<h1 className="Heading" style={{ color: "rgb(60, 248, 3) " }}>
 					Lifted Truck Blog
 				</h1>
 				<img
@@ -52,6 +52,8 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 						{" "}
 						Home{" "}
 					</Link>
+					{isLoggedIn && (
+						<>
 					<Link
 						to="/create"
 						className="mx-3"
@@ -59,8 +61,9 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 					>
 						New Blog
 					</Link>
-					{isLoggedIn && (
+					
 						<Link
+							title="logout"
 							to="/"
 							className="mx-3"
 							style={{ color: "rgb(60, 248, 3)" }}
@@ -73,6 +76,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
 							{" "}
 							Logout{" "}
 						</Link>
+						</>
 					)}
 
 					{!isLoggedIn && (
