@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from "./Footer";
 import axios from "axios";
 
 const Home = () => {
@@ -21,7 +20,7 @@ const Home = () => {
 
 	return (
 		<>
-			<div className="container Body">
+			<div className="container Body" title="Container Body">
 				{blogs.length > 0 &&
 					blogs.map(({ title, author, content, _id }, index) => (
 						<div className="card my-3" key={index}>

@@ -23,12 +23,11 @@ const Create = ({ edit, isEditMode }) => {
 				`http://localhost:8000/api/blogs/${id}`
 			);
 			// console.log(data);
-				if (edit) {
-					setTitle(data.blog.title);
-					setContent(data.blog.content);
-					setAuthor(data.blog.author);
-				}
-			
+			if (edit) {
+				setTitle(data.blog.title);
+				setContent(data.blog.content);
+				setAuthor(data.blog.author);
+			}
 		};
 
 		blogs();
@@ -147,7 +146,7 @@ const Create = ({ edit, isEditMode }) => {
 
 				<button
 					type="button"
-					className="btn btn-dark my-2"
+					className="btn btn-primary my-2"
 					onClick={handleSubmit}
 				>
 					{edit ? "Edit" : "Submit"}
