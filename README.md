@@ -4,8 +4,7 @@
 
 ## About:
 
-        The reason I did this project is because I love Chevrolet trucks and I've owned all different kinds and sizes throughout the years. Lifted trucks are very fun to drive, I owned one that had a nicelift on it with big tires 4 x 4. Anyway, on this Blog site, `Lifted Truck Blog`, you can register, login, logout, create a new blog, edit that particular blog, and delete that
-same blog as well.
+        The reason I did this project is because I love Chevrolet trucks and I've owned all different kinds and sizes throughout the years. Lifted trucks are very fun to drive, I owned one that had a nicelift on it with big tires 4 x 4. Anyway, on this Blog site, `Lifted Truck Blog`, you can register, login, logout, create a new blog, edit that particular blog, and delete that same blog as well.
 
         I used React.js for this project and it turned out pretty good. I'm very happy with the results and it's nice to learn about the same platform that Facebook & Netflix are built on(React). Looking forward to graduating and getting my Full-stack certificate.
 
