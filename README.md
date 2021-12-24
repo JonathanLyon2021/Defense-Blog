@@ -33,8 +33,3 @@ that same blog as well.
   
   I used React.js for this project and it turned out pretty good. I'm very happy with the results and it's nice to learn about the same platform that Facebook & Netflix are 
 built on(React). I will be trying to use Remix in the future for other React projects after I finish my Texas Hockey React.js webpage. Looking forward to graduating and getting my Full-stack certificate after this project. 
-  
-## Libraries Used for this project
-  Bootstrap, Browser-router from React, Use-State from React, Use-Effect from React, and Toastify from React for error/success mesages. I used, nodemon, mongoose, express, 
-  express-validator, bcrypt.js, cors, and dotenv as an environment variable. I used axios to make the calls to the backend.
-
