@@ -4,7 +4,7 @@
 
 ## About:
 
-        This is my "Project Defense", my final project for Full-Stack/Web development class here @ Kingsland University. The reason I did this project is because I love Chevrolet trucks and I've owned all different kinds & sizes throughout the years(1500's, 2500's, 3500's, Dually's, 4 x 4's, etc.). Lifted trucks are very fun to drive, I owned one that had a nice lift on it(around 4" - 6") with big tires that was 4 x 4(4 wheel drive). Anyway, on this Blog site, `Lifted Truck Blog`, you can register, login, logout, create a new blog, edit that particular blog, and delete that same blog as well. I used React.js for this project. I'm very happy with the results. It's nice to learn the platform that Facebook & Netflix are built on(React.js).
+        This is my "Project Defense", my final project for Full-Stack/Web development class here @ Kingsland University. The reason I did this project is because I love Chevrolet trucks and I've owned all different kinds & sizes throughout the years(1500's, 2500's, 3500's, Dually's, 4 x 4's, etc.). Lifted trucks are very fun to drive, I owned one that had a nice lift on it(around 4" - 6") with big tires that was 4 x 4(4 wheel drive). Anyway, on this Blog site, `Lifted Truck Blog`, you can register, login, logout, create a new blog, edit that particular blog, and delete that same blog as well. I used React.js for this project. I'm very happy with the end result. It's nice to learn the same platform/language that Facebook & Netflix are built on(React.js).
 
 ## Libraries Used for this project
 
@@ -28,8 +28,8 @@ Launches the test runner in the interactive watch mode for Unit Testing.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
   The reason I did this project is because I love Chevrolet trucks and I've owned all different kinds and sizes throughout the years. Lifted trucks are very fun to drive, I 
-owned one that had a nicelift on it. Anyway, on this Blog site, `Lifted Truck Blog`, you can register, login, logout, create a new blog, edit that particular blog, and delete 
-that same blog as well.
+owned one that had a nicelift on it. Anyway, on this Blog site, `Lifted Truck Blog`, you can register, login, logout, create a new blog, edit that particular blog, and 
+delete that same blog as well.
   
   I used React.js for this project and it turned out pretty good. I'm very happy with the results and it's nice to learn about the same platform that Facebook & Netflix are 
 built on(React). I will be trying to use Remix in the future for other React projects after I finish my Texas Hockey React.js webpage. Looking forward to graduating and getting my Full-stack certificate after this project. 
